@@ -17,5 +17,13 @@ public class Client {
 
     @Id
     @GeneratedValue
-    protected Long id;
+    private Long id;
+
+    private String name;
+    private String surname;
+    private String email;
+    private String igLink;
+    private String vkLink;
+    private String phone;
+
 }
