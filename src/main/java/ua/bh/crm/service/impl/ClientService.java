@@ -2,6 +2,7 @@ package ua.bh.crm.service.impl;
 
 import com.google.common.collect.Lists;
 import java.util.Collection;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,11 @@ public class ClientService implements IClientService {
 
     @Override
     public Client findById(Long id) {
-        return repository.findOne(id);
+        Optional<Client> client = repository.findById(id);
+        if (!client.isPresent()) {
+            // throw
+        }
+        return client.get();
     }
 
     @Override
@@ -46,6 +51,6 @@ public class ClientService implements IClientService {
 
     @Override
     public void delete(Long id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
 }

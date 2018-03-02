@@ -19,6 +19,4 @@ public class GlobalExceptionHandler {
         log.error("Exception ({}) occurred during processing request to {}", ex, request.getRequestURL());
         return "forward:/error";
     }
-
-
 }
