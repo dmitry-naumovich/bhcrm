@@ -1,45 +1,51 @@
 package ua.bh.crm.service.impl;
 
+import com.google.common.collect.Lists;
+import java.util.Collection;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.bh.crm.entity.Client;
 import ua.bh.crm.repository.ClientRepository;
 import ua.bh.crm.service.IClientService;
+import org.springframework.data.domain.Pageable;
 
 @Slf4j
 @Service
 public class ClientService implements IClientService {
 
-    private ClientRepository clientRepository;
+    private ClientRepository repository;
 
     @Autowired
-    public ClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    public ClientService(ClientRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public Client create(Client entity) {
-        return null;
+        log.debug("Creating client: {}", entity);
+        return repository.save(entity);
     }
 
     @Override
     public Client update(Long id, Client entity) {
-        return null;
+        entity.setId(id);
+        return repository.save(entity);
     }
 
     @Override
     public Client findById(Long id) {
-        return null;
+        return repository.findOne(id);
     }
 
     @Override
-    public Client findAll() {
-        return null;
+    public Collection<Client> findAll(Pageable pageable) {
+        Iterable<Client> clients = repository.findAll(pageable);
+        return Lists.newArrayList(clients);
     }
 
     @Override
     public void delete(Long id) {
-
+        repository.delete(id);
     }
 }
