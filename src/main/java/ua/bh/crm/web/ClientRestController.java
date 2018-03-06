@@ -24,7 +24,7 @@ public class ClientRestController {
 
     @GetMapping
     public String findAll(Model model, Pageable pageable) {
-        model.addAttribute("clients", clientService.findAll(pageable));
+        //model.addAttribute("clients", clientService.findAll(pageable));
         return "clients";
     }
 
